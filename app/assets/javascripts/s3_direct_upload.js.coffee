@@ -45,8 +45,8 @@ $.fn.S3Uploader = (options) ->
           unless settings.types.test(file.type) || settings.types.test(file.name)
             return alert("File does not match required filetype.")
         if settings.file_count_span
-          count = parseInt($(file_count_span).html())
-          $(file_count_span).html(count + 1)
+          count = parseInt($('.span-update').html())
+          $('.span-update').html(count + 1)
 
         unless settings.before_add and not settings.before_add(file)
           current_files.push data

@@ -16,6 +16,7 @@ $.fn.S3Uploader = (options) ->
 
   settings =
     path: ''
+    file_count_span: false
     types: false
     additional_data: null
     before_add: null
@@ -24,7 +25,6 @@ $.fn.S3Uploader = (options) ->
     progress_bar_target: null
     click_submit_target: null
     allow_multiple_files: true
-
 
   $.extend settings, options
 
@@ -44,6 +44,9 @@ $.fn.S3Uploader = (options) ->
         if settings.types
           unless settings.types.test(file.type) || settings.types.test(file.name)
             return alert("File does not match required filetype.")
+        if settings.file_count_span
+          count = parseInt($(file_count_span).html())
+          $(file_count_span).html(count + 1)
 
         unless settings.before_add and not settings.before_add(file)
           current_files.push data

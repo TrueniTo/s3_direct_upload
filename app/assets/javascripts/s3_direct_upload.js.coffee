@@ -81,6 +81,10 @@ $.fn.S3Uploader = (options) ->
           $.ajax
             type: $uploadForm.data('callback-method')
             url: callback_url
+            headers: {
+              "Cache-Control":"max-age=315576000",
+              "access":"public_read"
+            }
             data: content
             beforeSend: ( xhr, settings )       -> $uploadForm.trigger( 'ajax:beforeSend', [xhr, settings] )
             complete:   ( xhr, status )         -> $uploadForm.trigger( 'ajax:complete', [xhr, status] )

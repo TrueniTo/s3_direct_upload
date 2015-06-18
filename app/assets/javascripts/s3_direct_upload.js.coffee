@@ -25,6 +25,7 @@ $.fn.S3Uploader = (options) ->
     progress_bar_target: null
     click_submit_target: null
     allow_multiple_files: true
+    before_upload: false
 
   $.extend settings, options
 
@@ -140,7 +141,10 @@ $.fn.S3Uploader = (options) ->
     content.unique_id  = file.unique_id if 'unique_id' of file
     content.relativePath = build_relativePath(file) if has_relativePath(file)
     content = $.extend content, settings.additional_data if settings.additional_data
-    content
+    if settings.before_upload
+      settings.before_upload(content)
+    else
+      content
 
   has_relativePath = (file) ->
     file.relativePath || file.webkitRelativePath
